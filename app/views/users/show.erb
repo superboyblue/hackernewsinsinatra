@@ -3,5 +3,16 @@
 <h3>Posts!</h3>
 
 <%@user.posts.each do |post|%>
+
 <a href="/posts/<%=post.id%>"><%=post.title%></a><br>
+<form action="/posts/<%=post.id%>/edit">
+    <input type="submit" value="edit">
+</form>
+
+<form method="POST" action="/posts/<%= post.id %>">
+  <input type="hidden" name="_method" value="DELETE">
+  <input type="submit" value="DELETE">
+</form>
+
+
 <%end%>

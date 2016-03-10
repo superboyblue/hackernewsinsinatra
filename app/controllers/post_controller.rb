@@ -12,12 +12,17 @@ get '/posts/new' do
 end
 
 post '/posts' do
-  post = Post.new(params)
-    if post.save
-      redirect "/posts"
-    else
-      @errors = post.errors.full_messages
-    erb :"/posts/new"
+  if logged_in?
+    post = Post.new(params)
+    if current_user =
+      if post.save
+        redirect "/posts"
+      else
+        @errors = post.errors.full_messages
+      erb :"/posts/new"
+    end
+  else
+    redirect '/'
   end
 end
 
@@ -29,6 +34,8 @@ end
 delete '/posts/:id' do
   binding.pry
   post = Post.find_by(id: params[:id])
+  #guard clause
+  halt(403) unless current_user.owns?(post)
   post.destroy
     redirect "/users/#{post.user.id}"
 end
@@ -40,6 +47,8 @@ end
 
 put '/posts/:id' do
   @post = Post.find_by(id: params[:id])
+  # guard clause
+  halt(403) unless current_user.owns?(@post)
   @post.update(title: params[:title],link: params[:link])
   binding.pry
     redirect "/posts/#{@post.id}"

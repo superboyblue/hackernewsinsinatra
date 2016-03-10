@@ -7,4 +7,9 @@ class User < ActiveRecord::Base
 
   validates :password, format: { with: /\A(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}\z/ , message: "At least one upper case, at least one lower case, at least one digit, at least one special character, minimum length of 8"}
   validates :username, presence: true, uniqueness: true
+
+def owns?(post)
+  post.user == self
+end
+
 end

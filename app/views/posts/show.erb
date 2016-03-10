@@ -1,0 +1,5 @@
+
+<%@post.comments.each do |comment|%>
+<br><%=comment.text%><br>
+<a href="/users/<%=comment.user.id%>"><%=comment.user.username%></a>  <%=comment.created_at%><br>
+<%end%>

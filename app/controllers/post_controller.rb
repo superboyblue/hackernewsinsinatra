@@ -14,10 +14,10 @@ end
 post '/posts' do
   if logged_in?
     post = Post.new(params)
-    if current_user =
-      if post.save
+    if current_user == post.user
+        post.save
         redirect "/posts"
-      else
+    else
         @errors = post.errors.full_messages
       erb :"/posts/new"
     end

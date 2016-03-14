@@ -1,3 +1,5 @@
 post '/votes' do
-  binding.pry
+  # binding.pry
+  Vote.create(post_id:(params[:id]))
+
 end

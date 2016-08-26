@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!--
+    normalize.css removes cross-browser differences in defaults, e.g.,
+    differences in how form elements appear between Firefox and IE
+    See: http://necolas.github.com/normalize.css/
+  -->
+  <link rel="stylesheet" href="/css/normalize.css">
+  <!--
+    application.css is where you put your styles
+  -->
+  <link rel="stylesheet" href="/css/application.css">
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src="/js/application.js"></script>
+
+  <title>Quacker News</title>
+</head>
+<body>
+  <nav>
+    <h1><a href="/">Quacker News</a></h1>
+    <% if logged_in? %>
+      <h3>Welcome, <%= current_user.username %>!</h3>
+    <%end%>
+    <ul>
+    <% if logged_in? %>
+      <li><a href="/logout">Logout</a></li>
+      <li><a href="/posts/new">make a new post!</a></li>
+      <li><a href="/users/<%=session[:user_id]%>">profile</a></li>
+      <% else %>
+      <li><div id="login-form"><a href="/login">Login</a></div><div id="login-anchor"></div></li>
+      <li><div id="new-user-form"><a href="/users/new">register</a></div><div id="new-user-anchor"></div></li>
+      <% end %>
+    </ul>
+  </nav>
+  <%= yield %>
+</body>
+</html>

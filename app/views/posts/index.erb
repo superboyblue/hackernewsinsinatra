@@ -1,0 +1,7 @@
+<%@posts.each do |post|%>
+<div id="vote<%=post.id%>">
+<h4><a data-id= <%=post.id%> href="/votes">▲</a><%=post.id%>. <%=post.title%></h4>
+<a href="<%=post.link%>"><%=post.link%></a>
+<a href="/posts/<%=post.id%>">comments</a>
+
+<%end%>
